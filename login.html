@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" />
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="title">Sign in</h2>
+            <img src="profile.png" width=50%>
+            <form id='Login' action='javascript:login()'>
+                <input type='text' id='username' placeholder="Username" required><br><br>
+                <input type='password' id='password' placeholder="Password" required><br><br>
+                <input type="submit" value="Login" id="login" class="button-one">
+                <!--button value="Sign Up" id="register" class="button-two"> Sign Up</button-->
+            </form>
+            <p class="p">Don't have an account? &nbsp;&nbsp;<a href="register.html">Sign up</a></p>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("login").onclick = function () {
+        location.href = "homepage.html";
+    };
+</script>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpytKXB38eBgoFHW54LJ8GiDh1xuNaFMs"></script-->
+
+    <style>
+        .daycount {
+            margin-left: 5%;
+            margin-top: 2em;
+            height: 80px;
+            width: 90%;
+            background-color: wheat;
+            border-radius: 12px;
+        }
+
+        .doc-button {
+            float: left;
+            margin-left: 5%;
+            margin-top: 3%;
+            text-transform: uppercase;
+            width: 130px;
+            background-color: #F9A826;
+            border: none;
+            outline: none;
+            height: 60px;
+            border-radius: 12px;
+            color: #fff;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="daycount">
+        <button class="doc-button" id="doc"> Contact doctor</button>
+        <span
+            style="color: white; font-size: 18px;float: left; width: 10px; margin-top: 13px; margin-left: 8px;">Quarantine
+            days:</span>
+        <span
+            style="color:white; font-size: 35px; font-style: bold; float:right; margin-top: 13px; margin-right: 10px;">07/14</span>
+    </div>
+
+    <div>
+        <img src="nurse.png" class="img" style="margin-top:7rem;">
+        <form>
+            <input type="text" placeholder="Body Temperature" required></input>
+            <input type="text" placeholder="Symptoms" required></input>
+            <input type="submit" style="background-color: #F9A826; color: white"></input>
+        </form>
+    </div>
+
+    <!--div>
+        <button class = "button-one" style="width:90%; text-transform: none;">History</button>
+    </div-->
+
+    <div class="navbar">
+        <a href="home.html"><i class="fa fa-home"></i></a>
+        <a href="addlocation.html"><i class="fa fa-list"></i></a>
+        <!--a href="#"><i class="fa fa-thermometer-quarter"></i></a-->
+        <a href="loadlocation.html"><i class="fa fa-users"></i></a>
+        <a href="quarantine.html"><i class="fa fa-user-circle"></i></a>
+    </div>
+</body>
+
+<script>
+    document.getElementById("doc").onclick = function () {
+        location.href = "docInfo.html";
+    };
+</script>
+
+</html>

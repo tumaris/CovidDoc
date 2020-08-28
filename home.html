@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Places Search Box</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpytKXB38eBgoFHW54LJ8GiDh1xuNaFMs&callback=initAutocomplete&libraries=places&v=weekly"
+        defer></script>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 80%;
+            /* The height is 400 pixels */
+            width: 100%;
+        }
+
+        #pac-input {
+            position: absolute;
+            margin-top: 3em;
+            margin-left: 10px;
+            width: 95%;
+            height: 45px;
+            padding-left: 15px;
+            border-radius: 12px;
+            border-width: 2px;
+            border-color: #F9A826;
+            border: 2px;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .data-box {
+            padding-top: 2.0em;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .infected {
+            border: 1px solid #f9a826d9;
+            margin-left: 2%;
+            width: 30%;
+            float: left;
+            height: 60px;
+            border-radius: 12px;
+        }
+
+        .deaths {
+            border: 1px solid #e34128b8;
+            margin-left: 3%;
+            width: 30%;
+            float: left;
+            height:60px;
+            border-radius: 12px;
+        }
+
+        .recovered {
+            border: 1px solid #2a9d32dd;
+            margin-left: 3%;
+            float: left;
+            width: 30%;
+            height: 60px;
+            border-radius: 12px;
+        }
+
+        .p-data{
+            margin-bottom: -3px;
+            margin-left: 15%;
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #f9a826d9
+        }
+    </style>
+    <script>
+        "use strict";
+        function initAutocomplete() {
+            var philly = { lat: 39.952583, lng: -75.165222 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: philly,
+                zoom: 4,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                scaleControl: false,
+                zoomControl: false
+            });
+
+            // Create the search box and link it to the UI element.
+            const input = document.getElementById("pac-input");
+            const searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); // Bias the SearchBox results towards current map's viewport.
+
+            map.addListener("bounds_changed", () => {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            let markers = []; // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                } // Clear out the old markers.
+
+                markers.forEach(marker => {
+                    marker.setMap(null);
+                });
+                markers = []; // For each place, get the icon, name and location.
+
+                const bounds = new google.maps.LatLngBounds();
+                places.forEach(place => {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+
+                    const icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(34, 34)
+                    }; // Create a marker for each place.
+
+                    markers.push(
+                        new google.maps.Marker({
+                            map,
+                            icon,
+                            title: place.name,
+                            position: place.geometry.location
+                        })
+                    );
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search location" />
+    <div id="map"></div>
+    <div class="data-box">
+        <div class="infected"><p class="p-data">5.88M Cases</p>
+        </div>
+        <div class="deaths"><p class="p-data" style="color:#e34128b8">181K Deaths</p>
+        </div>
+        <div class="recovered"><p class="p-data" style="color:#2a9d32dd">3.3M Recovered</p>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <a href="home.html"><i class="fa fa-home"></i></a>
+        <a href="addlocation.html"><i class="fa fa-list"></i></a>
+        <!--a href="#"><i class="fa fa-thermometer-quarter"></i></a-->
+        <a href="loadlocation.html"><i class="fa fa-users"></i></a>
+        <a href="quarantine.html"><i class="fa fa-user-circle"></i></a>
+    </div>
+</body>
+
+</html>

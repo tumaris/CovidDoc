@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" />
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="title">Sign up</h2>
+            <img src="confirm.png" width=50%>
+            <form id='Login' action='javascript:login()'>
+                <input type='text' name='username' id='username' placeholder="Username" ><br><br>
+                <input type='text' name='email' id='email' placeholder="Email" ><br><br>
+                <input type='password' name='password' id='password' placeholder="Password"><br><br>
+                <button value="Sign Up" id="login" class="button-one">Sign in</button>
+                <!--sub style="color : red;" id="forget"><a style="color : gray;" href="">Forgot password?</a></sub-->
+            </form>
+            <p class="p">Already have an account? &nbsp;&nbsp;<a href="login.html">Log in</a></p>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.getElementById("login").onclick = function () {
+        location.href = "home.html";
+    };
+</script>
+
+</html>
